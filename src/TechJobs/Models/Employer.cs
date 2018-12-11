@@ -2,6 +2,9 @@
 {
     public class Employer : JobField
     {
-        // No additional members yet. See JobField.cs
+        public int EmployerID { get; set; }
+        public int EmployerAddress { get; set; }
+        public string EmployerPrimaryContact { get; set; }
+        public string EmployerListOfJobs { get; set; }
     }
 }
