@@ -61,7 +61,7 @@ namespace TechJobs.Controllers
                 }
 
                 jobFieldsViewModel.Fields = fields;
-                jobFieldsViewModel.Title =  "All " + column + " Values";
+                jobFieldsViewModel.Title =  "All " + column + " Opportunities";
                 jobFieldsViewModel.Column = column;
 
                 return View(jobFieldsViewModel);

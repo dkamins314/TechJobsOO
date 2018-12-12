@@ -14,33 +14,45 @@ namespace TechJobs.ViewModels
         [Required]
         [Display(Name = "Employer")]
         public int EmployerID { get; set; }
-        public int EmployerAddress { get; set; }
-        public string EmployerPrimaryContact { get; set; } 
-        public  string EmployerListOfJobs { get; set; }
+
+        [Required]
+        [Display(Name = "Location")]
+        public int LocationID { get; set; }
+
+        [Required]
+        [Display(Name = "CoreCompetency")]
+        public int CoreCompetencyID { get; set; }
+
+        [Required]
+        [Display(Name = "PositionType")]
+        public int PositionTypesID { get; set; }
 
         // TODO #3 - Included other fields needed to create a job,
         // with correct validation attributes and display names.
 
         public List<SelectListItem> Employers { get; set; } = new List<SelectListItem>();
+
         public List<SelectListItem> Locations { get; set; } = new List<SelectListItem>();
+
         public List<SelectListItem> CoreCompetencies { get; set; } = new List<SelectListItem>();
+
         public List<SelectListItem> PositionTypes { get; set; } = new List<SelectListItem>();
 
         public NewJobViewModel()
         {
-
             JobData jobData = JobData.GetInstance();
 
             foreach (Employer field in jobData.Employers.ToList())
             {
-                Employers.Add(new SelectListItem {
+                Employers.Add(new SelectListItem
+                {
                     Value = field.ID.ToString(),
                     Text = field.Value
                 });
             }
             foreach (Location field in jobData.Locations.ToList())
             {
-                Employers.Add(new SelectListItem
+                Locations.Add(new SelectListItem
                 {
                     Value = field.ID.ToString(),
                     Text = field.Value
@@ -48,7 +60,7 @@ namespace TechJobs.ViewModels
             }
             foreach (CoreCompetency field in jobData.CoreCompetencies.ToList())
             {
-                Employers.Add(new SelectListItem
+                CoreCompetencies.Add(new SelectListItem
                 {
                     Value = field.ID.ToString(),
                     Text = field.Value
@@ -56,15 +68,22 @@ namespace TechJobs.ViewModels
             }
             foreach (PositionType field in jobData.PositionTypes.ToList())
             {
-                Employers.Add(new SelectListItem
+                PositionTypes.Add(new SelectListItem
                 {
                     Value = field.ID.ToString(),
                     Text = field.Value
                 });
             }
-            // TODO #4 - populate the other List<SelectListItem> 
+            // TODO #4 - populate the other List<SelectListItem>
             // collections needed in the view
+        }
 
+        public NewJobViewModel(List<SelectListItem> employers, List<SelectListItem> locations, List<SelectListItem> coreCompetencies, List<SelectListItem> positionTypes)
+        {
+            Employers = employers;
+            Locations = locations;
+            CoreCompetencies = coreCompetencies;
+            PositionTypes = positionTypes;
         }
     }
 }
