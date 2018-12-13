@@ -5,7 +5,7 @@ using TechJobs.Models;
 
 namespace TechJobs.Data
 {
-    class JobData
+    internal class JobData
     {
         /**
          * A data store for Job objects
@@ -17,13 +17,13 @@ namespace TechJobs.Data
         public JobFieldData<PositionType> PositionTypes { get; set; } = new JobFieldData<PositionType>();
         public JobFieldData<CoreCompetency> CoreCompetencies { get; set; } = new JobFieldData<CoreCompetency>();
 
-
         private JobData()
         {
             JobDataImporter.LoadData(this);
         }
 
         private static JobData instance;
+
         public static JobData GetInstance()
         {
             if (instance == null)
@@ -34,11 +34,11 @@ namespace TechJobs.Data
             return instance;
         }
 
-
         /**
          * Return all Job objects in the data store
          * with a field containing the given term
          */
+
         public List<Job> FindByValue(string value)
         {
             var results = from j in Jobs
@@ -52,11 +52,11 @@ namespace TechJobs.Data
             return results.ToList();
         }
 
-
         /**
          * Returns results of search the jobs data by key/value, using
          * inclusion of the search term.
          */
+
         public List<Job> FindByColumnAndValue(JobFieldType column, string value)
         {
             var results = from j in Jobs
@@ -68,19 +68,23 @@ namespace TechJobs.Data
 
         /**
          * Returns the JobField of the given type from the Job object,
-         * for all types other than JobFieldType.All. In this case, 
+         * for all types other than JobFieldType.All. In this case,
          * null is returned.
          */
+
         public static JobField GetFieldByType(Job job, JobFieldType type)
         {
             switch (type)
             {
                 case JobFieldType.Employer:
                     return job.Employer;
+
                 case JobFieldType.Location:
                     return job.Location;
+
                 case JobFieldType.CoreCompetency:
                     return job.CoreCompetency;
+
                 case JobFieldType.PositionType:
                     return job.PositionType;
             }
@@ -88,11 +92,11 @@ namespace TechJobs.Data
             throw new ArgumentException("Cannot get field of type: " + type);
         }
 
-
         /**
          * Returns the Job with the given ID,
          * if it exists in the store
          */
+
         public Job Find(int id)
         {
             var results = from j in Jobs
@@ -101,6 +105,5 @@ namespace TechJobs.Data
 
             return results.Single();
         }
-
     }
 }

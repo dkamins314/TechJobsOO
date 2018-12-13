@@ -27,7 +27,6 @@ namespace TechJobs.Controllers
             job.CoreCompetency = jobData.CoreCompetencies.Find(newJobViewModel.CoreCompetencyID);
             job.PositionType = jobData.PositionTypes.Find(newJobViewModel.PositionTypesID);
 
-
             return View(job);
         }
 

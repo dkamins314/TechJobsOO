@@ -19,37 +19,30 @@
         }
 
         // Provide a basic case-insensitive search
-        public bool Contains( string testValue) 
+        public bool Contains(string testValue)
         {
-          
+            if (testValue == null)
+                return true;
+            else
             {
                 return Value.ToLower().Contains(testValue.ToLower());
-          
             }
-           
         }
-        public override string ToString()
-        {
-            return Value;
-        }
-
         // override object.Equals
         public override bool Equals(object obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
         {
-
-            if (obj == null || GetType() != obj.GetType())
-            {
-                return false;
-            }
-            
-            return (obj as JobField).ID == ID;
+            return false;
         }
 
-        // override object.GetHashCode
-        public override int GetHashCode()
-        {
-            return ID;
-        }
-
+        return (obj as JobField).ID == ID;
     }
+
+    // override object.GetHashCode
+    public override int GetHashCode()
+    {
+        return ID;
+    }
+}
 }
