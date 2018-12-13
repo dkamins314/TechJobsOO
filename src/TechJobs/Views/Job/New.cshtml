@@ -3,6 +3,7 @@
 <div asp-validation-summary="All"></div>
 
 <form asp-controller="Job" asp-action="New" method="post">
+    <div asp-validation-summary="All"></div>
     <div class="form-group">
         <label asp-for="Name"></label>
         <input class="form-control" asp-for="Name" />
@@ -24,11 +25,10 @@
         <label asp-for="PositionTypesID"></label>
         <select asp-for="PositionTypesID" asp-items="Model.PositionTypes"></select>
     </div>
-
-
-    @{ 
-        // TODO #5 - Create <select> dropdowns for other job fields (outside of this @{ } block) ask if other data fields should be fill in
-    }
+ 
 
     <input type="submit" value="Add Job" />
 </form>
+
+
+ 

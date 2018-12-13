@@ -21,8 +21,10 @@ namespace TechJobs.Controllers
         // Lists options for browsing, by "column"
         public IActionResult Index()
         {
-            JobFieldsViewModel jobFieldsViewModel = new JobFieldsViewModel();
-            jobFieldsViewModel.Title = "View Job Fields";
+            JobFieldsViewModel jobFieldsViewModel = new JobFieldsViewModel
+            {
+                Title = "View Job Fields"
+            };
 
             return View(jobFieldsViewModel);
         }
@@ -32,9 +34,11 @@ namespace TechJobs.Controllers
         {
             if (column.Equals(JobFieldType.All))
             {
-                SearchJobsViewModel jobsViewModel = new SearchJobsViewModel();
-                jobsViewModel.Jobs = jobData.Jobs;
-                jobsViewModel.Title =  "All Jobs";
+                SearchJobsViewModel jobsViewModel = new SearchJobsViewModel
+                {
+                    Jobs = jobData.Jobs,
+                    Title = "All Jobs"
+                };
                 return View("Jobs", jobsViewModel);
             }
             else
@@ -71,9 +75,11 @@ namespace TechJobs.Controllers
         // Lists Jobs with a given field matching a given value
         public IActionResult Jobs(JobFieldType column, string value)
         {
-            SearchJobsViewModel jobsViewModel = new SearchJobsViewModel();
-            jobsViewModel.Jobs = jobData.FindByColumnAndValue(column, value);
-            jobsViewModel.Title = "Jobs with " + column + ": " + value;
+            SearchJobsViewModel jobsViewModel = new SearchJobsViewModel
+            {
+                Jobs = jobData.FindByColumnAndValue(column, value),
+                Title = "Jobs with " + column + ":" + value
+            };
 
             return View(jobsViewModel);
         }

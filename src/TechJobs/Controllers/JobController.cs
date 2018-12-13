@@ -3,6 +3,7 @@ using TechJobs.Data;
 using TechJobs.Models;
 using TechJobs.ViewModels;
 
+
 namespace TechJobs.Controllers
 {
     public class JobController : Controller
@@ -10,24 +11,24 @@ namespace TechJobs.Controllers
         // Our reference to the data store
         private static JobData jobData;
 
-        static JobController()
-        {
-            jobData = JobData.GetInstance();
-        }
+        static JobController() => jobData = JobData.GetInstance();
+
+       
 
         // The detail display for a given Job at URLs like /Job?id=17
         public IActionResult Index(int id)
         {
-            Job job = jobData.Find(id);
-            NewJobViewModel newJobViewModel = new NewJobViewModel();
+            Job ajob = jobData.Find(id);
+            NewJobViewModel newjob = new NewJobViewModel
+            {
+                Name = ajob.Name,
+                EmployerID = ajob.Employer.ID,
+                LocationID = ajob.Location.ID,
+                CoreCompetencyID = ajob.CoreCompetency.ID,
+                PositionTypesID = ajob.PositionType.ID
+            };
 
-            job.Name = newJobViewModel.Name;
-            job.Employer = jobData.Employers.Find(newJobViewModel.EmployerID);
-            job.Location = jobData.Locations.Find(newJobViewModel.LocationID);
-            job.CoreCompetency = jobData.CoreCompetencies.Find(newJobViewModel.CoreCompetencyID);
-            job.PositionType = jobData.PositionTypes.Find(newJobViewModel.PositionTypesID);
-
-            return View(job);
+            return View(ajob);
         }
 
         public IActionResult New()
@@ -50,15 +51,17 @@ namespace TechJobs.Controllers
                     CoreCompetency = jobData.CoreCompetencies.Find(newJobViewModel.CoreCompetencyID),
                     PositionType = jobData.PositionTypes.Find(newJobViewModel.PositionTypesID)
                 };
-                jobData.Jobs.Add(new Job());
-                return Redirect(string.Format("/Job?id={0}", newJob.ID));
+
+                jobData.Jobs.Add(newJob);
+                return Redirect(string.Format("/job?id={0}", newJob.ID));
             }
 
-            // TODO #6 - Validate the ViewModel and if valid, create a
-            // new Job and add it to the JobData data store. Then
-            // redirect to the Job detail (Index) action/view for the new Job.
+       
 
             return View(newJobViewModel);
         }
     }
 }
+// TODO #6 - Validate the ViewModel and if valid, create a
+// new Job and add it to the JobData data store. Then
+// redirect to the Job detail (Index) action/view for the new Job.

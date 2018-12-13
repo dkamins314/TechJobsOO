@@ -27,8 +27,7 @@ namespace TechJobs.ViewModels
         [Display(Name = "PositionType")]
         public int PositionTypesID { get; set; }
 
-        // TODO #3 - Included other fields needed to create a job,
-        // with correct validation attributes and display names.
+       
 
         public List<SelectListItem> Employers { get; set; } = new List<SelectListItem>();
 
@@ -38,6 +37,7 @@ namespace TechJobs.ViewModels
 
         public List<SelectListItem> PositionTypes { get; set; } = new List<SelectListItem>();
 
+
         public NewJobViewModel()
         {
             JobData jobData = JobData.GetInstance();
@@ -46,7 +46,7 @@ namespace TechJobs.ViewModels
             {
                 Employers.Add(new SelectListItem
                 {
-                    Value = field.ID.ToString(),
+                    Value =  field.ID.ToString(),
                     Text = field.Value
                 });
             }
@@ -74,16 +74,12 @@ namespace TechJobs.ViewModels
                     Text = field.Value
                 });
             }
-            // TODO #4 - populate the other List<SelectListItem>
-            // collections needed in the view
-        }
-
-        public NewJobViewModel(List<SelectListItem> employers, List<SelectListItem> locations, List<SelectListItem> coreCompetencies, List<SelectListItem> positionTypes)
-        {
-            Employers = employers;
-            Locations = locations;
-            CoreCompetencies = coreCompetencies;
-            PositionTypes = positionTypes;
+            
         }
     }
 }
+
+// TODO #3 - Included other fields needed to create a job,
+// with correct validation attributes and display names.
+// TODO #4 - populate the other List<SelectListItem>
+// collections needed in the view
