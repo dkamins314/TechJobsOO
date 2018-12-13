@@ -8,7 +8,7 @@ namespace TechJobs.ViewModels
 {
     public class NewJobViewModel
     {
-        [Required]
+       [Required]
         public string Name { get; set; }
 
         [Required]
@@ -42,7 +42,9 @@ namespace TechJobs.ViewModels
         {
             JobData jobData = JobData.GetInstance();
 
-            foreach (Employer field in jobData.Employers.ToList())
+          
+
+                foreach (Employer field in jobData.Employers.ToList())
             {
                 Employers.Add(new SelectListItem
                 {

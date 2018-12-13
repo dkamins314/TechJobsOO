@@ -19,8 +19,14 @@ namespace TechJobs.Controllers
         public IActionResult Index(int id)
         {
             Job job = jobData.Find(id);
+            NewJobViewModel newJobViewModel = new NewJobViewModel();
 
-            // TODO #1 - get the Job with the given ID and pass it into the view
+            job.Name = newJobViewModel.Name;
+            job.Employer = jobData.Employers.Find(newJobViewModel.EmployerID);
+            job.Location = jobData.Locations.Find(newJobViewModel.LocationID);
+            job.CoreCompetency = jobData.CoreCompetencies.Find(newJobViewModel.CoreCompetencyID);
+            job.PositionType = jobData.PositionTypes.Find(newJobViewModel.PositionTypesID);
+
 
             return View(job);
         }
